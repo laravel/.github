@@ -13,9 +13,11 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            const repo = context.repo.repo;
+          
             const query = `
               query($number: Int!) {
-                repository(owner: "laravel", name: context.repo.repo) {
+                repository(owner: "laravel", name: "${repo}") {
                   pullRequest(number: $number) {
                     headRepositoryOwner {
                       login
