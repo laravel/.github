@@ -1,5 +1,7 @@
 name: "Pull Requests"
 
+# Credit: https://github.com/github/docs/blob/main/.github/workflows/notify-when-maintainers-cannot-edit.yaml
+
 on:
   workflow_call:
 
