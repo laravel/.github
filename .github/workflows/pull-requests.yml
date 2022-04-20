@@ -23,6 +23,7 @@ jobs:
                       login
                     }
                     maintainerCanModify
+                    state
                   }
                 }
               }
@@ -42,6 +43,12 @@ jobs:
 
               if (pullRequest.headRepositoryOwner.login === 'laravel') {
                 console.log('PR owned by laravel');
+
+                return;
+              }
+
+              if (pullRequest.headRepositoryOwner.state !== 'OPEN') {
+                console.log('PR has already been closed or merged');
 
                 return;
               }
