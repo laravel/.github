@@ -47,7 +47,7 @@ jobs:
                 return;
               }
 
-              if (! ['OPEN', 'DRAFT'].indexOf(pullRequest.headRepositoryOwner.state)) {
+              if (pullRequest.state !== 'OPEN') {
                 console.log('PR has already been closed or merged');
 
                 return;
