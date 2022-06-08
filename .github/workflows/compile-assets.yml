@@ -1,4 +1,4 @@
-name: Compile Assets
+name: compile assets
 
 on:
   workflow_call:
