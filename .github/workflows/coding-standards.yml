@@ -7,7 +7,7 @@ on:
         default: "8.1"
         type: string
       commit_message:
-        default: Fix code standards with Pint
+        default: Fix code styling
         type: string
 
 jobs:
