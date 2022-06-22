@@ -6,6 +6,9 @@ on:
       PHP_VERSION:
         default: "8.1"
         type: string
+      COMMIT_MESSAGE:
+        default: Fix code standards with Pint
+        type: string
 
 jobs:
   lint:
@@ -31,4 +34,4 @@ jobs:
       - name: Commit linted files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Fix code standards with Pint
+          commit_message: ${{ inputs.COMMIT_MESSAGE }}
