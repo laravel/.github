@@ -2,6 +2,10 @@ name: compile assets
 
 on:
   workflow_call:
+    inputs:
+      node:
+        default: "16"
+        type: string
 
 jobs:
   compile:
@@ -13,7 +17,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: ${{ inputs.node }}
 
       - name: Install NPM dependencies
         run: npm ci
