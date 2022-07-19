@@ -60,7 +60,7 @@ jobs:
                   issue_number: pullNumber,
                   owner: 'laravel',
                   repo: context.repo.repo,
-                  body: "Thanks for submitting a PR!\n\nIn order to review and merge PRs most efficiently, we require that all PRs grant maintainer edit access before we review them. For information on how to do this, [see the relevant GitHub documentation](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork). Additionally, GitHub doesn't allow maintainer permissions from organization accounts. Please resubmit this PR with maintainer permissions enabled."
+                  body: "Thanks for submitting a PR!\n\nIn order to review and merge PRs most efficiently, we require that all PRs grant maintainer edit access before we review them. For information on how to do this, [see the relevant GitHub documentation](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork). Additionally, GitHub doesn't allow maintainer permissions from organization accounts. Please resubmit this PR from a personal GitHub account with maintainer permissions enabled."
                 });
 
                 await github.rest.pulls.update({
