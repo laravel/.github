@@ -1,18 +1,13 @@
 name: issues
 
 on:
-  issues:
-    types:
-      - labeled
+  workflow_call:
 
 jobs:
   help-wanted:
     if: github.event.label.name == 'help wanted'
 
     runs-on: ubuntu-latest
-
-    permissions:
-      issues: write
 
     steps:
       - name: Add comment
