@@ -6,6 +6,9 @@ on:
       node:
         default: "16"
         type: string
+      cmd:
+        default: "production"
+        type: string
 
 jobs:
   compile:
@@ -23,7 +26,7 @@ jobs:
         run: npm ci
 
       - name: Compile assets
-        run: npm run production
+        run: npm run ${{ inputs.cmd }}
 
       - name: Commit compiled files
         uses: stefanzweifel/git-auto-commit-action@v4
