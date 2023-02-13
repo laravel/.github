@@ -9,6 +9,9 @@ on:
       message:
         default: Fix code styling
         type: string
+      fix:
+        default: true
+        type: boolean
 
 jobs:
   lint:
@@ -24,14 +27,15 @@ jobs:
           php-version: ${{ inputs.php }}
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
-          
+
       - name: Install Pint
         run: composer global require laravel/pint
-        
+
       - name: Run Pint
         run: pint
-          
+
       - name: Commit linted files
+        if: ${{ inputs.fix }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: ${{ inputs.message }}
