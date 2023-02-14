@@ -22,10 +22,10 @@ jobs:
         id: release_date
         run: |
           # Get UNIX timestamp from git-tag
-          TIMESTAMP_OF_LAST_COMMIT=$(git log -1 --date=unix --format=%ad '${{ github.event.release.tag_name }}');
+          TIMESTAMP_OF_RELEASE_COMMIT=$(git log -1 --date=unix --format=%ad '${{ github.event.release.tag_name }}');
 
           # Convert timestamp to UTC date in Y-m-d format
-          FORMATED_DATE=$(date -u -d @$TIMESTAMP_OF_LAST_COMMIT +%Y-%m-%d)
+          FORMATED_DATE=$(date -u -d @$TIMESTAMP_OF_RELEASE_COMMIT +%Y-%m-%d)
 
           # Make date available to other steps
           echo "date=$(echo $FORMATED_DATE)" >> $GITHUB_OUTPUT;
