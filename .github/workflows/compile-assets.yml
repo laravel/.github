@@ -7,7 +7,7 @@ on:
         default: "16"
         type: string
       cmd:
-        default: "production"
+        default: "build"
         type: string
 
 jobs:
