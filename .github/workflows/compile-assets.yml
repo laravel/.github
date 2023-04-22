@@ -14,6 +14,12 @@ jobs:
   compile:
     runs-on: ubuntu-latest
 
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # compiled assets back to the repository.
+      # https://github.blog/changelog/2023-02-02-github-actions-updating-the-default-github_token-permissions-to-read-only/
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
