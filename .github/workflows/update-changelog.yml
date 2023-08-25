@@ -18,6 +18,36 @@ jobs:
           # is not out of date.
           ref: ${{ github.event.release.target_commitish }}
 
+      - name: Check if branch and release match
+        if: ${{ github.event.release.target_commitish != 'main' && github.event.release.target_commitish != 'master' }}
+        id: guard
+        run: |
+          NUMERIC_VERSION="${RELEASE_TAG_NAME#v}"
+          MAJOR_VERSION="${NUMERIC_VERSION%%.*}"
+          BRANCH_MAJOR_VERSION="${BRANCH%%.*}"
+
+          echo "MAJOR_VERSION=$(echo $MAJOR_VERSION)" >> $GITHUB_OUTPUT;
+          echo "BRANCH_MAJOR_VERSION=$(echo $BRANCH_MAJOR_VERSION)" >> $GITHUB_OUTPUT;
+
+          if [ "$MAJOR_VERSION" != "$BRANCH_MAJOR_VERSION" ]; then
+            echo "Mismatched versions! Aborting."
+            VERSION_MISMATCH='true';
+          else
+            echo "Versions match! Proceeding."
+            VERSION_MISMATCH='false';
+          fi
+          echo "VERSION_MISMATCH=$(echo $VERSION_MISMATCH)" >> $GITHUB_OUTPUT;
+        env:
+          BRANCH: ${{ github.event.release.target_commitish }}
+          RELEASE_TAG_NAME: ${{ github.event.release.tag_name }}
+
+      - name: Fail if branch and release tag do not match
+        if: ${{ steps.guard.outputs.VERSION_MISMATCH == 'true' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+              core.setFailed('Workflow failed. Release version does not match with selected target branch. Changelog not updated automatically.')
+
       - name: Extract release date from git tag
         id: release_date
         run: |
