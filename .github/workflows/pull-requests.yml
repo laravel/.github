@@ -6,6 +6,67 @@ on:
   workflow_call:
 
 jobs:
+  draft:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const repo = context.repo.repo;
+          
+            const query = `
+              query($number: Int!) {
+                repository(owner: "laravel", name: "${repo}") {
+                  pullRequest(number: $number) {
+                    headRepositoryOwner {
+                      login
+                    }
+                    isDraft
+                    state
+                  }
+                }
+              }
+            `;
+
+            const pullNumber = context.issue.number;
+            const variables = { number: pullNumber };
+
+            try {
+              console.log(`Determine if pull request is submitted as draft ...`);
+
+              const result = await github.graphql(query, variables);
+
+              console.log(JSON.stringify(result, null, 2));
+
+              const pullRequest = result.repository.pullRequest;
+
+              if (pullRequest.headRepositoryOwner.login === 'laravel') {
+                console.log('PR owned by laravel');
+
+                return;
+              }
+
+              if (pullRequest.state !== 'OPEN') {
+                console.log('PR has already been closed or merged.');
+
+                return;
+              }
+
+              if (pullRequest.isDraft) {
+                console.log('PR not owned by Laravel and is submitted as a draft.');
+
+                await github.rest.issues.createComment({
+                  issue_number: pullNumber,
+                  owner: 'laravel',
+                  repo: context.repo.repo,
+                  body: "Thanks for submitting a PR!\n\nNote that draft PR's are not reviewed. If you would like a review, please mark your pull request as ready for review in the GitHub user interface.\n\nPull requests that are abandoned in draft may be closed due to inactivity."
+                });
+              }
+            } catch(e) {
+              console.log(e);
+            }
+
   uneditable:
     runs-on: ubuntu-latest
 
