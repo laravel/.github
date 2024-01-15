@@ -60,7 +60,7 @@ jobs:
                   issue_number: pullNumber,
                   owner: 'laravel',
                   repo: context.repo.repo,
-                  body: "Thanks for submitting a PR!\n\nNote that draft PR's are not reviewed. If you would like a review, please mark your pull request as ready for review in the GitHub user interface.\n\nIf your pull request remains in draft for too long, we may close it due to inactivity."
+                  body: "Thanks for submitting a PR!\n\nNote that draft PR's are not reviewed. If you would like a review, please mark your pull request as ready for review in the GitHub user interface.\n\nPull requests that are abandoned in draft may be closed due to inactivity."
                 });
               }
             } catch(e) {
