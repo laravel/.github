@@ -33,7 +33,7 @@ jobs:
             const variables = { number: pullNumber };
 
             try {
-              console.log(`Check is pull request is submitted as draft ...`);
+              console.log(`Determine if pull request is submitted as draft ...`);
 
               const result = await github.graphql(query, variables);
 
@@ -48,19 +48,19 @@ jobs:
               }
 
               if (pullRequest.state !== 'OPEN') {
-                console.log('PR has already been closed or merged');
+                console.log('PR has already been closed or merged.');
 
                 return;
               }
 
               if (pullRequest.isDraft) {
-                console.log('PR not owned by Laravel and is submitted as a draft');
+                console.log('PR not owned by Laravel and is submitted as a draft.');
 
                 await github.rest.issues.createComment({
                   issue_number: pullNumber,
                   owner: 'laravel',
                   repo: context.repo.repo,
-                  body: "Thanks for submitting a PR!\n\nPlease note that draft PR's are not reviewed. If you'd like a review, please mark your pull request as ready in the GitHub user interface.\n\nShould your pull request remain a draft for too long, we may close it due to inactivity."
+                  body: "Thanks for submitting a PR!\n\nNote that draft PR's are not reviewed. If you would like a review, please mark your pull request as ready for review in the GitHub user interface.\n\nIf your pull request remains in draft for too long, we may close it due to inactivity."
                 });
               }
             } catch(e) {
