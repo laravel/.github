@@ -9,6 +9,9 @@ on:
       cmd:
         default: "production"
         type: string
+      build_path:
+        default: "public/"
+        type: string
 
 jobs:
   compile:
@@ -32,4 +35,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Compile Assets
-          file_pattern: public/
+          file_pattern: ${{ inputs.build_path }}
