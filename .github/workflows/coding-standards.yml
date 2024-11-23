@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       php:
-        default: "8.1"
+        default: "8.2"
         type: string
       message:
         default: Fix code styling
@@ -25,11 +25,9 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ inputs.php }}
+          tools: composer:v2, laravel/pint
           extensions: json, dom, curl, libxml, mbstring
           coverage: none
-
-      - name: Install Pint
-        run: composer global require laravel/pint
 
       - name: Run Pint
         run: pint
