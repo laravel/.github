@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       node:
-        default: "16"
+        default: "lts/*"
         type: string
       cmd:
         default: "production"
