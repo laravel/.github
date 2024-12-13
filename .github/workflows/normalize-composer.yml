@@ -1,4 +1,4 @@
-name: Normalize every composer.json file
+name: normalize composer.json files
 
 on:
   workflow_call:
@@ -7,7 +7,7 @@ on:
         default: "8.4"
         type: string
       message:
-        default: Normalize every composer.json file
+        default: Normalize composer.json files
         type: string
       fix:
         default: true
