@@ -1,4 +1,4 @@
-name: normalize every composer.json files
+name: Normalize every composer.json file
 
 on:
   workflow_call:
