@@ -7,7 +7,7 @@ on:
         default: "8.4"
         type: string
       message:
-        default: Normalize every composer.json files
+        default: Normalize every composer.json file
         type: string
       fix:
         default: true
