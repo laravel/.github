@@ -32,7 +32,7 @@ jobs:
         run: npm run ${{ inputs.cmd }}
 
       - name: Commit compiled files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: Compile Assets
           file_pattern: ${{ inputs.build_path }}
