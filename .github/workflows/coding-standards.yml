@@ -18,6 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Force Failure
+        run: exit 1
+
       - name: Checkout code
         uses: actions/checkout@v6
 
