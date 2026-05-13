@@ -1,5 +1,8 @@
 name: Setup Composer
 
+on:
+  workflow_call:
+
 jobs:
   setup-composer:
     steps:
