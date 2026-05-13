@@ -5,6 +5,9 @@ name: pull requests
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   draft:
     runs-on: ubuntu-latest
