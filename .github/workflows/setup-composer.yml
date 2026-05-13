@@ -5,6 +5,8 @@ on:
 
 jobs:
   setup-composer:
+    runs-on: ubuntu-latest
+
     steps:
       # Workaround for new GitHub token format breaking Composer 2.9.7's token
       # regex (composer/composer#12849). shivammathur/setup-php writes the
