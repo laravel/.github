@@ -16,14 +16,18 @@ on:
         default: ${{ github.event.release.body }}
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
+          persist-credentials: false
           # Fetch entire history of repository to ensure release date can be
           # extracted from commit of the given tag.
           fetch-depth: 0
@@ -56,7 +60,7 @@ jobs:
 
       - name: Fail if branch and release tag do not match
         if: ${{ steps.guard.outputs.VERSION_MISMATCH == 'true' }}
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
           script: |
               core.setFailed('Workflow failed. Release version does not match with selected target branch. Changelog not updated automatically.')
@@ -74,7 +78,7 @@ jobs:
           echo "date=$(echo $FORMATED_DATE)" >> $GITHUB_OUTPUT;
 
       - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
+        uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
         with:
           # Pass extracted release date, release notes and version to the Action.
           release-date: ${{ steps.release_date.outputs.date }}
@@ -84,7 +88,7 @@ jobs:
           parse-github-usernames: true
 
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v7
+        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7
         with:
           # Push updated CHANGELOG to release target branch.
           branch: ${{ inputs.branch }}
