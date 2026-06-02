@@ -4,7 +4,7 @@
 
 ## Supported Versions
 
-Only the latest major version receives security fixes.
+Security fixes are provided for the currently maintained version of this project, package, application, or service.
 
 ## Reporting a Vulnerability
 
