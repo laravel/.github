@@ -4,9 +4,7 @@ on:
   workflow_call:
 
 permissions:
-  contents: read
   issues: write
-  pull-requests: write
 
 jobs:
   help-wanted:
