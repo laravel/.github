@@ -2,6 +2,10 @@ name: static analysis
 
 on:
   workflow_call:
+    inputs:
+      php:
+        default: "8.2"
+        type: string
 
 permissions:
   contents: read
@@ -21,7 +25,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
-          php-version: 8.2
+          php-version: ${{ inputs.php }}
           extensions: swoole, relay
           tools: composer:v2
           coverage: none
