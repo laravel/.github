@@ -77,7 +77,7 @@ jobs:
           echo "date=$(echo $FORMATED_DATE)" >> $GITHUB_OUTPUT;
 
       - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@a938690fad7edf25368f37e43a1ed1b34303eb36 # v1
+        uses: stefanzweifel/changelog-updater-action@f7c43fed0c8760b25199be6eae5c28fc22830ec6 # v1.13.3
         with:
           # Pass extracted release date, release notes and version to the Action.
           release-date: ${{ steps.release_date.outputs.date }}
